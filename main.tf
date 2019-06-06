@@ -10,6 +10,7 @@ variable "server_port" {
 resource "aws_instance" "ha-se-test" {
   ami                    = "ami-067c32f3d5b9ace91"
   instance_type          = "t2.micro"
+  vpc_security_group_ids = [aws_security_group.instance.id]
 
   user_data = <<-EOF
               #!/bin/bash

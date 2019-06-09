@@ -1,5 +1,5 @@
               #!/bin/bash
-              VAULT_VERSION="1.13"
+              VAULT_VERSION="1.1.3"
               curl --silent --remote-name https://releases.hashicorp.com/vault/${VAULT_VERSION}/vault_${VAULT_VERSION}_linux_amd64.zip
               unzip vault_${VAULT_VERSION}_linux_amd64.zip
               sudo chown root:root vault

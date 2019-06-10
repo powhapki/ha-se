@@ -1,5 +1,5 @@
 #!/bin/bash
-STEP00=`sudo yum install unzip -y`
+STEP00=`sudo apt install unzip -y`
 echo "Install Unzip"
 sleep 1
 echo $STEP00
@@ -37,16 +37,16 @@ STEP06=`consul -autocomplete-install && complete -C /usr/local/bin/consul consul
 echo $STEP06
 sleep 1
 
-:'
+
 echo "Create a unique, non-privileged system user to run Consul and create its data directory"
 STEP07_1=`sudo useradd --system --home /etc/consul.d --shell /bin/false consul`
 echo $STEP07_1
-STEP07_2=`sudo mkdir --parents /opt/consul`
+STEP07_2=`sudo mkdir --parents /var/run/consul`
 echo $STEP07_2
-STEP07_3=`sudo chown --recursive consul:consul /opt/consul`
+STEP07_3=`sudo chown --recursive consul:consul /var/run/consul`
 echo $STEP07_3
 sleep 1
-'
+
 
 echo "Configure systemd"
 echo "Step 1: Create a Consul Service file"
@@ -72,7 +72,7 @@ User=consul
 Group=consul
 PIDFile=/var/run/consul/consul.pid
 PermissionsStartOnly=true
-ExecStartPre=-/bin/mkdir -p /var/run/consul
+ExecStartPre=/bin/mkdir -p /var/run/consul
 ExecStartPre=/bin/chown -R consul:consul /var/run/consul
 ExecStart=/usr/local/bin/consul agent \
     -config-file=/usr/local/etc/consul/server_agent.json \
@@ -86,5 +86,4 @@ RestartSec=42s
 [Install]
 WantedBy=multi-user.target
 EOF
-
 

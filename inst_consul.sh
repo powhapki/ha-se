@@ -1,5 +1,5 @@
 #!/bin/bash
-STEP00=`sudo yum install unzip -y`
+STEP00=`sudo apt install unzip -y`
 echo "Install Unzip"
 sleep 1
 echo $STEP00

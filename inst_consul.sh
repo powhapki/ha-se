@@ -72,8 +72,6 @@ User=consul
 Group=consul
 PIDFile=/var/run/consul/consul.pid
 PermissionsStartOnly=true
-ExecStartPre=/bin/mkdir -p /var/run/consul
-ExecStartPre=/bin/chown -R consul:consul /var/run/consul
 ExecStart=/usr/local/bin/consul agent \
     -config-file=/usr/local/etc/consul/server_agent.json \
     -pid-file=/var/run/consul/consul.pid
@@ -86,4 +84,7 @@ RestartSec=42s
 [Install]
 WantedBy=multi-user.target
 EOF
+
+#ExecStartPre=/bin/mkdir -p /var/run/consul
+#ExecStartPre=/bin/chown -R consul:consul /var/run/consul
 

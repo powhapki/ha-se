@@ -49,6 +49,7 @@ sleep 1
 
 echo "Configure systemd"
 echo "Step 1: Create a Consul Service file"
+sudo touch /etc/systemd/system/consul.service
 sudo cat << EOF > /etc/systemd/system/consul.service
 [Unit]
 Description="HashiCorp Consul - A service mesh solution"

@@ -1,5 +1,5 @@
 #!/bin/bash
-STEP00=`sudo apt install unzip -y`
+STEP00=`sudo yum install unzip -y`
 echo "Install Unzip"
 sleep 1
 echo $STEP00
@@ -37,7 +37,7 @@ STEP06=`consul -autocomplete-install && complete -C /usr/local/bin/consul consul
 echo $STEP06
 sleep 1
 
-
+:'
 echo "Create a unique, non-privileged system user to run Consul and create its data directory"
 STEP07_1=`sudo useradd --system --home /etc/consul.d --shell /bin/false consul`
 echo $STEP07_1
@@ -46,27 +46,45 @@ echo $STEP07_2
 STEP07_3=`sudo chown --recursive consul:consul /opt/consul`
 echo $STEP07_3
 sleep 1
+'
 
 echo "Configure systemd"
 echo "Step 1: Create a Consul Service file"
 sudo touch /etc/systemd/system/consul.service
 sudo cat << EOF > /etc/systemd/system/consul.service
+### BEGIN INIT INFO
+# Provides:          consul
+# Required-Start:    $local_fs $remote_fs
+# Required-Stop:     $local_fs $remote_fs
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Consul agent
+# Description:       Consul service discovery framework
+### END INIT INFO
+
 [Unit]
-Description="HashiCorp Consul - A service mesh solution"
-Documentation=https://www.consul.io/
+Description=Consul server agent
 Requires=network-online.target
 After=network-online.target
-ConditionFileNotEmpty=/etc/consul.d/consul.hcl
 
 [Service]
 User=consul
 Group=consul
-ExecStart=/usr/local/bin/consul agent -config-dir=/etc/consul.d/
-ExecReload=/usr/local/bin/consul reload
+PIDFile=/var/run/consul/consul.pid
+PermissionsStartOnly=true
+ExecStartPre=-/bin/mkdir -p /var/run/consul
+ExecStartPre=/bin/chown -R consul:consul /var/run/consul
+ExecStart=/usr/local/bin/consul agent \
+    -config-file=/usr/local/etc/consul/server_agent.json \
+    -pid-file=/var/run/consul/consul.pid
+ExecReload=/bin/kill -HUP $MAINPID
 KillMode=process
+KillSignal=SIGTERM
 Restart=on-failure
-LimitNOFILE=65536
+RestartSec=42s
 
 [Install]
 WantedBy=multi-user.target
 EOF
+
+

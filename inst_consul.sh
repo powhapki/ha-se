@@ -39,7 +39,7 @@ sleep 1
 
 
 echo "Create a unique, non-privileged system user to run Consul and create its data directory"
-STEP07_1=`sudo useradd --system --home /etc/consul.d --shell /bin/false consul`
+STEP07_1=`sudo useradd --system --home /usr/local/etc/consul --shell /bin/false consul`
 echo $STEP07_1
 STEP07_2=`sudo mkdir --parents /var/run/consul`
 echo $STEP07_2
@@ -48,8 +48,7 @@ echo $STEP07_3
 sleep 1
 
 
-echo "Configure systemd"
-echo "Step 1: Create a Consul Service file"
+echo "Configure systemd: Create a Consul Service file"
 sudo touch /etc/systemd/system/consul.service
 sudo cat << EOF > /etc/systemd/system/consul.service
 ### BEGIN INIT INFO
@@ -66,15 +65,14 @@ sudo cat << EOF > /etc/systemd/system/consul.service
 Description=Consul server agent
 Requires=network-online.target
 After=network-online.target
+ConditionFileNotEmpty=/usr/local/etc/consul/server_agent.json
 
 [Service]
 User=consul
 Group=consul
 PIDFile=/var/run/consul/consul.pid
 PermissionsStartOnly=true
-ExecStart=/usr/local/bin/consul agent \
-    -config-file=/usr/local/etc/consul/server_agent.json \
-    -pid-file=/var/run/consul/consul.pid
+ExecStart=/usr/local/bin/consul agent -config-file=/usr/local/etc/consul/server_agent.json -pid-file=/var/run/consul/consul.pid -disable-keyring-file
 ExecReload=/bin/kill -HUP $MAINPID
 KillMode=process
 KillSignal=SIGTERM
@@ -84,7 +82,3 @@ RestartSec=42s
 [Install]
 WantedBy=multi-user.target
 EOF
-
-#ExecStartPre=/bin/mkdir -p /var/run/consul
-#ExecStartPre=/bin/chown -R consul:consul /var/run/consul
-

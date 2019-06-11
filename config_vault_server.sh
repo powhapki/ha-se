@@ -6,6 +6,7 @@ sudo touch /usr/local/etc/consul/vault_server.hcl
 
 
 sudo cat <<EOF > /usr/local/etc/consul/vault_server.hcl
+ui = true
 listener "tcp" {
   address          = "0.0.0.0:8200"
   cluster_address  = "$local_ip:8201"

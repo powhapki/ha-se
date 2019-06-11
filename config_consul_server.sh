@@ -22,7 +22,7 @@ sudo cat <<EOF > /usr/local/etc/consul/server_agent.json
     "acl_enforce_version_8" : false
 }
 EOF
-#encrypt="$(consul keygen)"
+
 
 sudo chown --recursive consul:consul /usr/local/etc/consul
 sudo touch /usr/local/etc/consul/server_agent.json

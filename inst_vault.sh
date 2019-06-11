@@ -1,5 +1,5 @@
 #!/bin/bash
-STEP00=`sudo yum install unzip -y`
+STEP00=`sudo apt install unzip -y`
 echo "Install Unzip"
 sleep 1
 echo $STEP00
@@ -39,3 +39,4 @@ sleep 1
 sudo setcap cap_ipc_lock=+ep /usr/local/bin/vault
 sudo useradd --system --home /etc/vault.d --shell /bin/false vault
 sudo touch /etc/systemd/system/vault.service
+

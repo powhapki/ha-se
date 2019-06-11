@@ -33,8 +33,10 @@ echo $STEP05
 sleep 1
 
 echo "Performming Vault autocomplete install"
-STEP06=`consul -autocomplete-install && complete -C /usr/local/bin/consul consul`
-echo $STEP06
+STEP06_1=`consul -autocomplete-install`
+echo $STEP06_1
+STEP06_2=`complete -C /usr/local/bin/consul consul`
+echo $STEP06_2
 sleep 1
 
 

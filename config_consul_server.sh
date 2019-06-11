@@ -8,9 +8,9 @@ sudo touch /usr/local/etc/consul/server_agent.json
 sudo cat <<EOF > /usr/local/etc/consul/server_agent.json
 {
     "server" : true,
-    "node_name" : "consul_$local_ip",
+    "node_name" : "consul_s_$local_ip",
     "datacenter" : "dc1",
-    "data_dir" : "/var/consul/data",
+    "data_dir" : "/var/run/consul/data",
     "bind_addr" : "0.0.0.0",
     "client_addr" : "0.0.0.0",
     "advertise_addr" : "$local_ip",
@@ -20,13 +20,10 @@ sudo cat <<EOF > /usr/local/etc/consul/server_agent.json
     "log_level" : "DEBUG",
     "enable_syslog" : true,
     "acl_enforce_version_8" : false
+}
 EOF
 #encrypt="$(consul keygen)"
 
-:'
-sudo chown --recursive consul:consul /etc/consul.d
-sudo touch /etc/consul.d/consul.hcl
-sudo chmod 640 /etc/consul.d/consul.hcl
-'
-
-
+sudo chown --recursive consul:consul /usr/local/etc/consul
+sudo touch /usr/local/etc/consul/server_agent.json
+sudo chmod 640 /usr/local/etc/consul/server_agent.json

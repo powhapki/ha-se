@@ -4,6 +4,7 @@
 Tech. Exercise envrionment is based the following pages.
 
 https://learn.hashicorp.com/vault/operations/ops-vault-ha-consul
+
 https://learn.hashicorp.com/vault/operations/ops-deployment-guide
 
 This environment consists of 2 Valut Server Instances (with consul agent), 3 Consul Server Instances and 1 PostgreSQL RDS Instance.

@@ -13,6 +13,7 @@ listener "tcp" {
   tls_disable      = "true"
 }
 
+# Configure consul as a storage backend of Vault in HA
 storage "consul" {
   address = "127.0.0.1:8500"
   path    = "vault/"

@@ -11,7 +11,8 @@ https://learn.hashicorp.com/vault/operations/ops-deployment-guide
 This environment consists of 2 Valut Server Instances (with consul agent), 3 Consul Server Instances and 1 PostgreSQL RDS Instance.
 
 Vault Server will be configured as HA mode and use Consul as the storage backend.
-For Vault dynmic secrets live demo, PostgreSQL will be used.
+
+For Vault dynamic secrets live demo, PostgreSQL will be used.
 
 
 ## Install Process

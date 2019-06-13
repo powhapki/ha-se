@@ -31,13 +31,13 @@ echo $STEP05
 sleep 1
 
 echo "Performming Vault autocomplete install"
-STEP06_1=`vault -autocomplete-install`
-echo $STEP06_1
+STEP06=`vault -autocomplete-install`
+echo $STEP06
 sleep 1
-STEP06_2=`complete -C /usr/local/bin/vault vault`
-echo $STEP06_2
+complete -C /usr/local/bin/vault vault
 
 
+echo "Give Vault the ability to use the mlock syscall without running the process as root"
 sudo setcap cap_ipc_lock=+ep /usr/local/bin/vault
 
 

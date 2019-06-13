@@ -33,11 +33,12 @@ echo $STEP05
 sleep 1
 
 echo "Performming Vault autocomplete install"
-STEP06_1=`consul -autocomplete-install`
-echo $STEP06_1
-STEP06_2=`complete -C /usr/local/bin/consul consul`
-echo $STEP06_2
+STEP06=`consul -autocomplete-install`
+echo $STEP06
+complete -C /usr/local/bin/consul consul
 sleep 1
+
+
 
 
 echo "Create a unique, non-privileged system user to run Consul and create its data directory"

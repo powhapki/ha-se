@@ -1,7 +1,7 @@
 #!/bin/bash
 #Download the Vault Entperise Binary
 
-git clone https://github.com/powhapki/ha-se.git /home/ubuntu/ha-se
-cd /home/ubuntu/ha-se
+git clone https://github.com/powhapki/ha-se.git /home/ubuntu/ha-se/
+cd /home/ubuntu/ha-se/terraform-vault-cluster
 chmod 755 inst_vault.sh && sh inst_vault.sh
 chmod 755 config_vault_server.sh && sh config_vault_server.sh

@@ -81,14 +81,17 @@ Version            1.2.2+ent.hsm
 HA Enabled         false
 </pre>
 
+## Time for using the Vault
 Now, you can use the Vault Server for the POC.
 Here're some useful links.
-[learn.hashicorp.com Vault](http://learn.hashicorp.com/vault/)
-[Vault Documentation](https://www.vaultproject.io/docs/)
-[Vault API Documentation](https://www.vaultproject.io/api/)
+
++ [learn.hashicorp.com/vault](http://learn.hashicorp.com/vault/)
++ [Vault Documentation](https://www.vaultproject.io/docs/)
++ [Vault API Documentation](https://www.vaultproject.io/api/)
+
 
 ***
-Without Consul Backend, you need to specify the file backend.
+Without a Consul Backend, you need to specify the file backend.
 
 <pre>
 storage "file" {

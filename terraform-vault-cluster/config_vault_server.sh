@@ -1,12 +1,10 @@
 #!/bin/bash
 
 local_ip=`echo $(hostname -I)|tr -d ''`
-sudo mkdir --parents /etc/vault.d
+sudo mkdir -p /etc/vault.d /mnt/vault/data
+sudo chown -R vault:vault /etc/vault.d /mnt/vault/data
 sudo touch /etc/vault.d/vault_server.hcl
-sudo chown --recursive vault:vault /etc/vault.d
 sudo chmod 640 /etc/vault.d/vault_server.hcl
-sudo mkdir --parents /mnt/vault/data
-sudo chown --recursive vault:vault /mnt/vault/data
 
 sudo cat <<EOF > /etc/vault.d/vault_server.hcl
 ui = true

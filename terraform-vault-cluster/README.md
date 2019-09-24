@@ -29,12 +29,63 @@ Unseal Key 5: y33ddddddddd
 Initial Root Token: absdfsdsdfsd
 ...
 </pre>
-
-### Unseal
-
-
 *You need to save the Unseal Key and Initial Root Token safely for further usage.*
 
+
+### Unseal
+Vault initialized with 5 key shares and a key threshold of 3. Please securely distribute the key shares printed above. When the Vault is re-sealed, restarted, or stopped, you must supply at least 3 of these keys to unseal it before it can start servicing requests.
+
+Vault does not store the generated master key. Without at least 3 key to reconstruct the master key, Vault will remain permanently sealed!
+
+Before proceding the CLI operations, you need to specify the ROOT_TOKEN.
+<pre>
+export ROOT_TOKEN='absdfsdsdfsd'
+</pre>
+
+<pre>
+$ vault operator unseal ggggggggggg
+Key                Value
+---                -----
+Seal Type          shamir
+Initialized        true
+Sealed             true
+Total Shares       5
+Threshold          3
+Unseal Progress    1/3
+Unseal Nonce       f9608b16-e8d1-0ba5-6336-a37f0758ec86
+Version            1.2.2+ent.hsm
+HA Enabled         false
+$ vault operator unseal y33ddddddddd
+Key                Value
+---                -----
+Seal Type          shamir
+Initialized        true
+Sealed             true
+Total Shares       5
+Threshold          3
+Unseal Progress    2/3
+Unseal Nonce       f9608b16-e8d1-0ba5-6336-a37f0758ec86
+Version            1.2.2+ent.hsm
+HA Enabled         false
+$ vault operator unseal xxxxxxx
+Key                Value
+---                -----
+Seal Type          shamir
+Initialized        true
+Sealed             true
+Total Shares       5
+Threshold          3
+Unseal Progress    3
+Unseal Nonce       f9608b16-e8d1-0ba5-6336-a37f0758ec86
+Version            1.2.2+ent.hsm
+HA Enabled         false
+</pre>
+
+Now, you can use the Vault Server for the POC.
+Here're some useful links.
+[learn.hashicorp.com Vault](http://learn.hashicorp.com/vault/)
+[Vault Documentation](https://www.vaultproject.io/docs/)
+[Vault API Documentation](https://www.vaultproject.io/api/)
 
 ***
 Without Consul Backend, you need to specify the file backend.

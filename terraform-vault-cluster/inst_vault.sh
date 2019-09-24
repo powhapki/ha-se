@@ -4,18 +4,17 @@ echo "Install Unzip"
 sleep 1
 echo $STEP00
 
-VAULT_VERSION="1.1.3"
 STEP01=`curl --silent --remote-name https://s3-us-west-2.amazonaws.com/hc-enterprise-binaries/vault/ent.hsm/1.2.2/vault-enterprise_1.2.2%2Bent.hsm_linux_amd64.zip`
 echo "Donwloading latest VAULT"
 echo $STEP01
 echo "Finished"
-sleep 1
+sleep 10
 
 echo "Unzip Vault"
 STEP02=`unzip vault-enterprise_1.2.2%2Bent.hsm_linux_amd64.zip`
 echo $STEP02
 echo `ls -al vault`
-sleep 1
+sleep 10
  
 STEP03=`sudo chown root:root vault`
 echo $STEP03
@@ -31,9 +30,10 @@ echo $STEP05
 sleep 1
 
 echo "Performming Vault autocomplete install"
-STEP06=`vault -autocomplete-install && complete -C /usr/local/bin/vault vault`
+STEP06=`vault -autocomplete-install`
+complete -C /usr/local/bin/vault vault
 echo $STEP06
-sleep 1
+sleep 10
 
 
 sudo setcap cap_ipc_lock=+ep /usr/local/bin/vault
@@ -64,20 +64,37 @@ sudo cat << EOF > /etc/systemd/system/vault.service
 ### END INIT INFO
 
 [Unit]
-Description=Vault secret management tool
+Description="HashiCorp Vault - A tool for managing secrets"
+Documentation=https://www.vaultproject.io/docs/
 Requires=network-online.target
 After=network-online.target
+ConditionFileNotEmpty=/etc/vault.d/vault.hcl
+StartLimitIntervalSec=60
+StartLimitBurst=3
 
 [Service]
 User=vault
 Group=vault
-PIDFile=/var/run/vault/vault.pid
-ExecStart=/usr/local/bin/vault server -config=/etc/vault/vault_server.hcl -log-level=debug
-ExecReload=/bin/kill -HUP $MAINPID
+ProtectSystem=full
+ProtectHome=read-only
+PrivateTmp=yes
+PrivateDevices=yes
+SecureBits=keep-caps
+AmbientCapabilities=CAP_IPC_LOCK
+Capabilities=CAP_IPC_LOCK+ep
+CapabilityBoundingSet=CAP_SYSLOG CAP_IPC_LOCK
+NoNewPrivileges=yes
+ExecStart=/usr/local/bin/vault server -config=/etc/vault.d/vault_server.hcl -log-level=debug
+ExecReload=/bin/kill --signal HUP $MAINPID
 KillMode=process
-KillSignal=SIGTERM
+KillSignal=SIGINT
 Restart=on-failure
-RestartSec=42s
+RestartSec=5
+TimeoutStopSec=30
+StartLimitInterval=60
+StartLimitIntervalSec=60
+StartLimitBurst=3
+LimitNOFILE=65536
 LimitMEMLOCK=infinity
 
 [Install]

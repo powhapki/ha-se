@@ -5,14 +5,14 @@ sleep 1
 echo $STEP00
 
 VAULT_VERSION="1.1.3"
-STEP01=`curl --silent --remote-name https://releases.hashicorp.com/vault/${VAULT_VERSION}/vault_${VAULT_VERSION}_linux_amd64.zip`
+STEP01=`curl --silent --remote-name https://s3-us-west-2.amazonaws.com/hc-enterprise-binaries/vault/ent.hsm/1.2.2/vault-enterprise_1.2.2%2Bent.hsm_linux_amd64.zip`
 echo "Donwloading latest VAULT"
 echo $STEP01
 echo "Finished"
 sleep 1
 
 echo "Unzip Vault"
-STEP02=`unzip vault_${VAULT_VERSION}_linux_amd64.zip`
+STEP02=`unzip vault-enterprise_1.2.2%2Bent.hsm_linux_amd64.zip`
 echo $STEP02
 echo `ls -al vault`
 sleep 1

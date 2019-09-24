@@ -68,22 +68,13 @@ Description="HashiCorp Vault - A tool for managing secrets"
 Documentation=https://www.vaultproject.io/docs/
 Requires=network-online.target
 After=network-online.target
-ConditionFileNotEmpty=/etc/vault.d/vault.hcl
 StartLimitIntervalSec=60
 StartLimitBurst=3
 
 [Service]
 User=vault
 Group=vault
-ProtectSystem=full
-ProtectHome=read-only
-PrivateTmp=yes
-PrivateDevices=yes
-SecureBits=keep-caps
-AmbientCapabilities=CAP_IPC_LOCK
-Capabilities=CAP_IPC_LOCK+ep
-CapabilityBoundingSet=CAP_SYSLOG CAP_IPC_LOCK
-NoNewPrivileges=yes
+PIDFile=/var/run/vault/vault.pid
 ExecStart=/usr/local/bin/vault server -config=/etc/vault.d/vault_server.hcl -log-level=debug
 ExecReload=/bin/kill --signal HUP $MAINPID
 KillMode=process

@@ -1,4 +1,4 @@
-## Tech. Excercise for Hashicorp SE
+## Tech. Excercise 
 
 
 ## Tech Excercise Environment Overview

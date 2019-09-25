@@ -48,7 +48,11 @@ Vault does not store the generated master key. Without at least 3 key to reconst
 
 Before proceding the CLI operations, you need to specify the ROOT_TOKEN.
 <pre>
-export ROOT_TOKEN='absdfsdsdfsd'
+$ export ROOT_TOKEN='absdfsdsdfsd'
+</pre>
+In case of saving vault init output to a file, you can set the ROOT_TOKEN like following:
+<pre>
+$ export ROOT_TOKEN=$(grep 'Root Token' vault_init.log | awk '{print $4}')
 </pre>
 
 <pre>

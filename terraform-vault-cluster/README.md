@@ -98,7 +98,7 @@ In case of saving vault init output to a file, you can set the ROOT_TOKEN like f
 $ vault operator unseal $(grep 'Unseal Key 2' vault_init.log |awk '{print $4}')
 </pre>
 
-# Apply the trail license
+# Apply the trial license
 
 <pre>
 $ vault write sys/license text=<contents_of_vault_license>

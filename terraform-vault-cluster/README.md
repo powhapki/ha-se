@@ -23,7 +23,7 @@ After installing and configuring the Vault Server, you need to initialize the Va
 Before proceding the CLI operations, you need to specify the VAULT_ADDR first.
 <pre>
 $ export VAULT_ADDR="http://127.0.0.1:8200"
-$ vault operator init
+$ vault operator init 2>&1 > vault_init.log 
 </pre>
 
 The output will be like the followings.

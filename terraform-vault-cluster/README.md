@@ -1,4 +1,4 @@
-# Provision the Vault cluster
+# Provision the Vault Server
 ***
 When you use userdata for AWS, you can refer [user_data_4_poc](https://github.com/powhapki/ha-se/blob/master/terraform-vault-cluster/user_data_4_poc) as a sample input.
 
@@ -7,6 +7,15 @@ When you use userdata for AWS, you can refer [user_data_4_poc](https://github.co
 Run each scripts with the following orders.
 1. [inst_vault.sh](https://github.com/powhapki/ha-se/blob/master/terraform-vault-cluster/inst_vault.sh)
 2. [configure_vault_server.sh](https://github.com/powhapki/ha-se/blob/master/terraform-vault-cluster/config_vault_server.sh)
+
+## Start Vault
+Enable and start Vault using the systemctl command responsible for controlling systemd managed services. Check the status of the vault service using systemctl.
+
+<pre>
+sudo systemctl enable vault
+sudo systemctl start vault
+sudo systemctl status vault
+</pre>
 
 ## Initialization and Unsealing of the Vault Server
 ### Initializing

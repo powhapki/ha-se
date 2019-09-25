@@ -101,6 +101,7 @@ $ vault operator unseal $(grep 'Unseal Key 2' vault_init.log |awk '{print $4}')
 # Apply the license
 You have to enable the Enterprise license through the command below.
 <pre>
+$ vault login $ROOT_TOKEN
 $ vault write sys/license text='contents_of_vault_license'
 </pre>
 

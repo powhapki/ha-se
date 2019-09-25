@@ -98,6 +98,12 @@ In case of saving vault init output to a file, you can set the ROOT_TOKEN like f
 $ vault operator unseal $(grep 'Unseal Key 2' vault_init.log |awk '{print $4}')
 </pre>
 
+# Apply the trail license
+
+<pre>
+$ vault write sys/license text=01…
+</pre>
+
 ## Time for using the Vault
 Now, you can use the Vault Server for the POC.
 Here're some useful links.

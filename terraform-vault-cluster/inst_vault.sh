@@ -31,11 +31,10 @@ sleep 1
 
 echo "Performming Vault autocomplete install"
 STEP06=`vault -autocomplete-install`
-complete -C /usr/local/bin/vault vault
 echo $STEP06
 sleep 10
 
-
+complete -C /usr/local/bin/vault vault
 sudo setcap cap_ipc_lock=+ep /usr/local/bin/vault
 
 

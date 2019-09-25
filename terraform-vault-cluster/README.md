@@ -49,9 +49,9 @@ Vault does not store the generated master key. Without at least 3 key to reconst
 Before proceding the CLI operations, you need to specify the ROOT_TOKEN.
 <pre>
 $ export ROOT_TOKEN='absdfsdsdfsd'
-</pre>
+
 In case of saving vault init output to a file, you can set the ROOT_TOKEN like following:
-<pre>
+
 $ export ROOT_TOKEN=$(grep 'Root Token' vault_init.log | awk '{print $4}')
 </pre>
 
@@ -92,6 +92,10 @@ Unseal Progress    3
 Unseal Nonce       f9608b16-e8d1-0ba5-6336-a37f0758ec86
 Version            1.2.2+ent.hsm
 HA Enabled         false
+
+In case of saving vault init output to a file, you can set the ROOT_TOKEN like following:
+
+$ vault operator unseal $(grep 'Unseal Key 2' vault_init.log |awk '{print $4}')
 </pre>
 
 ## Time for using the Vault

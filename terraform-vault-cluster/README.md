@@ -101,7 +101,7 @@ $ vault operator unseal $(grep 'Unseal Key 2' vault_init.log |awk '{print $4}')
 # Apply the trail license
 
 <pre>
-$ vault write sys/license text=01…
+$ vault write sys/license text=<contents_of_vault_license>
 </pre>
 
 ## Time for using the Vault
